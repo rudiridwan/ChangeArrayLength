@@ -1,26 +1,26 @@
-package nomer1;
+
+package no2sampai5;
 
 import java.lang.reflect.Array;
 
 public class ChangeArrayLength {
-    public static Object[][] changeLength2D(Object [][] a, int n, int m, int newLength, int newLength2){
+    public static Object[] changeLength1D(Object [] a, int n, int newLength){
+        //a[0:n-1] akan di copy ke array yg baru
+        //pastikan panjang yg baru itu memadai
+        if(n>newLength){
+            throw new IllegalArgumentException("new length is too small");
+        }
+        //alokasikan array baru dari panjang yg diinginkan dan tipe yg sama
+        Object [] newArray = (Object []) Array.newInstance(a.getClass().getComponentType(), newLength);
         
-        if (n> newLength){
-            throw new IllegalArgumentException("length baru terlalu kecil");
-        }
-        if(m>newLength2){
-            throw new IllegalArgumentException("length ke-2 terlalu kecil");
-        }
-
-        Object [][] newArray = (Object [][]) Array.newInstance(a.getClass().getComponentType(), newLength, newLength2);
-
-        newArray = (Object[][])a.clone(); 
+        //copy dari ruang lama ke yang baru
+        System.arraycopy(a, 0, newArray, 0, n);
         
         return newArray;
     }
     
-    
-    public static Object [][] changeLength2D(Object[][] a, int newLength, int newLength2){// semua array di copy ke array yg baru
-        return changeLength2D(a, a.length, a[0].length, newLength, newLength2);
+    //semua array akan di copy ke array yg baru
+    public static Object [] changeLength1D(Object[] a, int newLength){
+        return changeLength1D(a, a.length, newLength);
     }
 }
